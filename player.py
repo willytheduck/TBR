@@ -48,7 +48,7 @@ class Player:
         say(f"{self.name}   HP {hp_bar(self.hp,self.max_hp)}")
         say(f"STRENGTH {self.strength} (muscle {self.muscle}/{XP_P_STRENGTH} to next)")
         w = WEAPON[self.weapon]
-        say(f"WEAPON   {w.name} (+{w.dmg})    -> total ATK {self.attack}")
+        say(f"WEAPON   {w.name} (+{w.dmg})    -> total ATK {self.atk}")
         arm = ARMOR[self.armor].name if self.armor else "none"
         say(f"ARMOR    {arm} (DEF {self.defense})")
         say(f"Kills: {self.kills}   Spared: {self.spares}")
