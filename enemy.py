@@ -19,7 +19,7 @@ class Enemy:
     die_txt: str = "They crumble to dust... why..."
     boss: bool = False
     taunts: list = field(default_factory=list)  # (hp fraction, line) showed once
-    block_spare: str = "They just doesn't want to listen anymore. What did you do??"
+    block_spare: str = ""#"They just doesn't want to listen anymore. What did you do??"
     max_hp: int = 0
     mercy: int = 0
 
@@ -116,7 +116,8 @@ ENEMY_DATA = {
             "Talk": ("You say you just want to go home. Toriel flinches", 30),
             "Hug": ("You step into the flames and hug her", 45),
             "Stay": (
-                "You stand still. She can't bring herself to attack you (Stay with me Mayonaka no doa o tataki :P), 40"
+                "You stand still. She can't bring herself to attack you (Stay with me Mayonaka no doa o tataki :P)",
+                40,
             ),
         },
         spare_txt="Toriel decided to let you go.. 'Ah.. go on then, my child.'",
@@ -280,4 +281,91 @@ ENEMY_DATA = {
             (0.25, "Undyne: 'I'm not done yet!'"),
         ],
     ),
+    # --Hotland--
+    "vulkin": dict(
+        name="Vulkin",
+        hp=20,
+        atk=25,
+        defense=0,
+        intro="Vulkin strolls in.",
+        flavor=[
+            "Vulkin parades around the room.",
+            "Vulkin is making coffee in its crater.",
+            "Vulkin is wiggling its weird rump.",
+            "Vulkin makes a smoke hoop and jumps through it.",
+            "Smells like a lava lamp.",
+        ],
+        acts={
+            "Criticize": ("Vulkin stands in the corner.", 40),
+            "Encourage": (
+                "You tell Vulkin it's doing a great job. Its attacks become extreme...",
+                70,
+            ),
+        },
+    ),
+    "pyrope": dict(
+        name="Pyrope",
+        hp=110,
+        atk=29,
+        defense=14,
+        intro="Pyrope bounds towards you!",
+        flavor=[
+            "Pyrope is protected by its winsome smile.",
+            "Pyrope is pretending to pull the fire alarm.",
+            "Pyrope is chuckling through its teeth.",
+            "Pyrope is pretending to be a candle.",
+            "Smells like rope burn.",
+        ],
+        kinds=["dodge", "orange"],
+        acts={
+            "Invite": ("You invite Pyrope to hang out.", 60),
+            "Heat": ("You crank up the thermostat. It's SOOOO hot!", 60),
+        },
+    ),
+    "tsunderplane": dict(
+        name="Tsunderplane",
+        hp=80,
+        atk=25,
+        defense=26,
+        intro="Tsunderplane gets in the way! Not on purpose or anything.",
+        flavor=[
+            "Tsunderplane looks over, then turns up its nose.",
+            "Tsunderplane shakes its nose dimissively at you.",
+            "Tsunderplane 'accidentally' bumps you with its wing.",
+            "Tsunderplane gives you a condescending barrel roll.",
+            "Smells like an airport perfume counter.",
+        ],
+        acts={
+            "Fllirt": (
+                "You tell Tsunderplane that you like its taste in movies and books.",
+                70,
+            ),
+            "Approach": ("You get close to Tsunderplane. But not too close.", 20),
+        },
+    ),
+    "mettaton": dict(
+        name="Mettaton",
+        hp=9999,
+        atk=30,
+        defense=255,
+        boss=True,
+        volleys=(2,3),
+        seq_len=(3, 4),
+        kinds=["dodge", "blue"],
+        intro="A spotlight snaps on. 'LADIES AND GENTLEMONSTERS!' Mettaton rolls out.",
+        flavor=["The quiz show continues.", "Mettaton."],
+        acts={
+            "Pose": ("You strike a pose. The audience loves it.", 30),
+            "Applaud": ("You clap for him. Mettaton is touched.", 35),
+            "Heckle": ("You boo. Mettaton gets angry, ratings drop.", 5),
+        },
+        spare_txt="I'LL BE ALRIGHT. KNOCK 'EM DEAD, DARLING. AND EVERYONE... THANK YOU. YOU'VE BEEN A GREAT AUDIENCE!",
+        die_txt="I still got to perform for a human, didn't I? So, thank you, darling... You've been a great audience!",
+        taunts=[(0.5, "Mettaton: 'The ratings! Keep the show going!")],
+    ),
 }
+
+
+def make_enemy(key, player=None):
+    # fresh copy of an enemy (dmg never carries over)
+    return Enemy(key=key, **copy.deepcopy(ENEMY_DATA[key]))
