@@ -56,6 +56,7 @@ def dodge_atk(player, enemy, kind):
     player.hp -= dmg
     say(f"  You took {hits} hit(s)! -{dmg} HP   {hp_bar(player.hp, player.max_hp)}")
 
+
 def enemy_turn(player, enemy):
     for _ in range(random.randint(*enemy.volleys)):
         dodge_atk(player, enemy, random.choice(enemy.kinds))

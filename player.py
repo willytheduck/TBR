@@ -1,7 +1,7 @@
 from items import WEAPON, ARMOR, FOOD
 from ui import say, rule, hp_bar
 
-XP_P_STRENGTH = 8 #muscle point for +1 strength
+XP_P_STRENGTH = 8  # muscle point for +1 strength
 
 
 class Player:
@@ -26,13 +26,13 @@ class Player:
     @property
     def defense(self):
         return ARMOR[self.armor].defense if self.armor else 0
-    
-    def heal(self,amount):
+
+    def heal(self, amount):
         before = self.hp
         self.hp = min(self.max_hp, self.hp + amount)
         return self.hp - before
 
-    def eat(self,idx):
+    def eat(self, idx):
         food = FOOD[self.items.pop(idx)]
         heald = self.heal(food.heal)
         say(f"Yum! You ate {food.name}.")

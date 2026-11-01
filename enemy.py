@@ -19,7 +19,9 @@ class Enemy:
     die_txt: str = "They crumble to dust... why..."
     boss: bool = False
     taunts: list = field(default_factory=list)  # (hp fraction, line) showed once
-    block_spare: str = ""#"They just doesn't want to listen anymore. What did you do??"
+    block_spare: str = (
+        ""  # "They just doesn't want to listen anymore. What did you do??"
+    )
     max_hp: int = 0
     mercy: int = 0
 
@@ -348,7 +350,7 @@ ENEMY_DATA = {
         atk=30,
         defense=40,
         boss=True,
-        volleys=(2,3),
+        volleys=(2, 3),
         seq_len=(3, 4),
         kinds=["dodge", "blue"],
         intro="A spotlight snaps on. 'LADIES AND GENTLEMONSTERS!' Mettaton rolls out.",
@@ -369,6 +371,6 @@ def make_enemy(key, player=None):
     # fresh copy of an enemy (dmg never carries over)
     if key == "papyrus":
         from PAPYRUS import make_papyrus
+
         return make_papyrus(player)
     return Enemy(key=key, **copy.deepcopy(ENEMY_DATA[key]))
-  
