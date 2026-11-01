@@ -5,7 +5,7 @@ from inv import inv_menu
 from enemy import ENEMY_DATA, make_enemy
 from atk import enemy_turn, hit_dmg
 from battle import battle
-
+from gym import gym
 
 def title_sc():
     rule("=")
@@ -31,28 +31,27 @@ def show_e(key):
 
 def main():
     player = Player("Tester")
-    player.wpns_owned += ["toy_knife", "ballet_shoes"]
-    player.arms_owned += ["bandage"]
-    player.items += ["hot_dog", "nice_cream"]
-    keys = list(ENEMY_DATA.keys())
+    state = {}
+    keys = list(ENEMY_DATA. keys())
 
     while True:
-        say(f"\nHP {hp_bar(player.hp, player.max_hp)}   kills {player.kills}    spared {player.spares}")
-        pick = menu("Test menu:", ["Fight enemy", "Heal full", "Status", "Inv", "Quit"])
+        say(f"\nHP {hp_bar(player.hp, player.max_hp)}   STR {player.strength}   ATK {player.atk}")
+        pick = menu("Test manu:", ["Train", "Fight", "Heal", "Status", "Inv", "Quit"])
         if pick == 0:
+            gym(player, "Test Gym", state)
+        elif pick == 1:
             names = [ENEMY_DATA[k]["name"] for k in keys] + ["Back"]
-            i = menu("Which enemy?", names)
+            i = menu("Which", names)
             if i < len(keys):
                 result = battle(player, make_enemy(keys[i]))
                 say(f"\nResult: {result}")
                 if result == "dead":
-                    say("(test mode: you got healed)")
                     player.hp = player.max_hp
-        elif pick == 1:
-            player.hp = player.max_hp
         elif pick == 2:
-            player.status()
+            player.hp = player.max_hp
         elif pick == 3:
+            player.status()
+        elif pick ==4:
             inv_menu(player)
         else:
             break
