@@ -23,7 +23,7 @@ def do_fight(player, enemy):
         dmg = int(dmg *1.5) +1
         say("CRITICAL HIT! lucky...")
         enemy.hp -= dmg
-        say(f"{enemy.name} takes {dmg} damage!  {hp_bar(enemy.hp, enemy.max_hp)}")
+    say(f"{enemy.name} takes {dmg} damage!  {hp_bar(enemy.hp, enemy.max_hp)}")
 
 def do_act(player,enemy):
     names = ["Check"] + list(enemy.acts.keys()) + ["Back"]

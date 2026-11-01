@@ -100,9 +100,9 @@ ENEMY_DATA = {
     ),
     "toriel": dict(
         name="Toriel",
-        hp=440,
-        atk=80,
-        defense=80,
+        hp=110,
+        atk=14,
+        defense=15,
         boss=True,
         volleys=(2, 2),
         intro="Toriel blocks the way! ",
@@ -207,7 +207,6 @@ ENEMY_DATA = {
         spare_txt="Greater Dog is contented.",
         die_txt="The armor clatters to the ground. How evil!",
     ),
-    # lazy to do papyrus
     # --Waterfall--
     "woshua": dict(
         name="Woshua",
@@ -249,8 +248,8 @@ ENEMY_DATA = {
     ),
     "undyne": dict(
         name="Undyne",
-        hp=1500,
-        atk=50,
+        hp=750,
+        atk=30,
         defense=20,
         boss=True,
         volleys=(2, 3),
@@ -345,9 +344,9 @@ ENEMY_DATA = {
     ),
     "mettaton": dict(
         name="Mettaton",
-        hp=9999,
+        hp=1249,
         atk=30,
-        defense=255,
+        defense=40,
         boss=True,
         volleys=(2,3),
         seq_len=(3, 4),
@@ -368,4 +367,8 @@ ENEMY_DATA = {
 
 def make_enemy(key, player=None):
     # fresh copy of an enemy (dmg never carries over)
+    if key == "papyrus":
+        from PAPYRUS import make_papyrus
+        return make_papyrus(player)
     return Enemy(key=key, **copy.deepcopy(ENEMY_DATA[key]))
+  

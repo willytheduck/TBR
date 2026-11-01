@@ -29,7 +29,7 @@ def inv_menu(player, in_battle=False):
             names = [f"{WEAPON[w].name} (+{WEAPON[w].dmg})" + (" [equipped]" if w == player.weapon else "") for w in player.wpns_owned] + ["Cancel"]
             pick = menu("Which weapon?", names)
             if pick < len(player.wpns_owned):
-                player.wpns_owned = player.wpns_owned[pick]
+                player.weapon = player.wpns_owned[pick]
                 say(f"You equipped {WEAPON[player.weapon].name}.")
         elif choice == "Equip armor":
             if not player.arms_owned:

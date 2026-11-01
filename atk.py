@@ -26,28 +26,35 @@ def dodge_atk(player, enemy, kind):
         if not _legend_shown:
             say("   Type the matching keys FAST: w=^ a=< s=v d=>    ")
             _legend_shown = True
-            limit = BASE_T + TIME_P_A * n
-            start = time.time()
-            ans = "".join(ask("    dodge> ").split())
-            elapsed = time.time() - start
-            miss = sum(1 for i, c in enumerate(seq) if i >= len(ans) or ans[i] != c)
-            miss += max(0, len(ans) - n)
-            if elapsed > limit:
-                miss += 1
-                say(f"  Bruh.. You're too slow! ({elapsed:.1f}s/{limit:.1f}s)")
-            hits = min(miss, n)
-        elif kind == "blue":
-            say("\n>> BLUE ATK! DON'T MOVE! type  stop  to hold still.")
-            start = time.time()
-            ans = ask("    dodge> ")
-            if ans != "stop" or time.time() - start > SP_TIME:
-                hits = 2
-        if hits == 0:
-            say("   Dam you're good. You dodged it all! WOW")
-            return
-        dmg = hits * per_hit
-        player.hp -= dmg
-        say(f"  You took {hits} hit(s)! -{dmg} HP   {hp_bar(player.hp, player.max_hp)}")
+        limit = BASE_T + TIME_P_A * n
+        start = time.time()
+        ans = "".join(ask("    dodge> ").split())
+        elapsed = time.time() - start
+        miss = sum(1 for i, c in enumerate(seq) if i >= len(ans) or ans[i] != c)
+        miss += max(0, len(ans) - n)
+        if elapsed > limit:
+            miss += 1
+            say(f"  Bruh.. You're too slow! ({elapsed:.1f}s/{limit:.1f}s)")
+        hits = min(miss, n)
+    elif kind == "blue":
+        say("\n>> BLUE ATK! DON'T MOVE! type  stop  to hold still.")
+        start = time.time()
+        ans = ask("    dodge> ")
+        if ans != "stop" or time.time() - start > SP_TIME:
+            hits = 2
+    else:
+        say("\n>> ORANGE ATK! KEEP MOVING! type  go  to keep moving.")
+        start = time.time()
+        ans = ask("    dodge> ")
+        if ans != "go" or time.time() - start > SP_TIME:
+            hits = 2
+
+    if hits == 0:
+        say("   Dam you're good. You dodged it all! WOW")
+        return
+    dmg = hits * per_hit
+    player.hp -= dmg
+    say(f"  You took {hits} hit(s)! -{dmg} HP   {hp_bar(player.hp, player.max_hp)}")
 
 def enemy_turn(player, enemy):
     for _ in range(random.randint(*enemy.volleys)):

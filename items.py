@@ -38,7 +38,7 @@ ARMOR = {
 
 FOOD = {
     "monster_candy": Food("Monster Candy", 10, "Has a distinct, non-licorice flavor."),
-    "spider_dont": Food("Spider Dont", 12, "A donut made with Spider Cider in the batter."),
+    "spider_donut": Food("Spider Dont", 12, "A donut made with Spider Cider in the batter."),
     "nice_cream": Food("Nice Cream", 15, "Instead of a joke, the wrapper says something nice."),
     "hot_dog": Food("Hot Dog", 20, "The 'meat' is made of something called a 'water sausage'."),
     "glamburger": Food("Glamburger", 27, "A hamburger made of edible glitter and sequins."),
