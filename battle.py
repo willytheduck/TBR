@@ -24,7 +24,7 @@ def do_fight(player, enemy):
     if random.random() < CRIT_CHANCE:
         dmg = int(dmg * 1.5) + 1
         say("CRITICAL HIT! lucky...")
-        enemy.hp -= dmg
+    enemy.hp -= dmg
     say(f"{enemy.name} takes {dmg} damage!  {hp_bar(enemy.hp, enemy.max_hp)}")
 
 

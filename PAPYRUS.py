@@ -42,7 +42,7 @@ def make_papyrus(player=None):
                 "Talk": ("There's nothing to say...", 0),
             },
             block_spare=(
-                "Papyrus: 'WHAT'S THE POINT OF SPARING."
+                "Papyrus: 'WHAT'S THE POINT OF SPARING. "
                 "AFTER WHAT YOU DID TO EVERYONE...'"
             ),
             taunts=[
