@@ -83,8 +83,8 @@ def main():
         play_once()
         if menu("\nPlay again?", ["Yes", "No"]) == 1:
             say("See you in the Underground!")
+            input("\n(press Enter to close)")
             return
-
 
 if __name__ == "__main__":
     main()
